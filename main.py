@@ -4,7 +4,6 @@ from base64 import b64encode, b64decode
 from urllib.parse import quote_plus, parse_qs, urlparse
 from datetime import datetime, timedelta
 from lxml import etree
-
 import hmac
 import hashlib 
 
@@ -127,8 +126,13 @@ def create_sha256_signature(key, message):
     byte_message = message.encode('utf-8')
     return hmac.new(byte_key, byte_message, hashlib.sha256).hexdigest().lower()
 
+
 def add_token_to_memory_store(new_token, memory_store):
     expires = datetime.now() + timedelta(minutes=10)
     memory_store[new_token] = {'expires_at': expires }
     # remove expired tokens from store
     memory_store = {token:content for token, content in memory_store.items() if content['expires_at'] > datetime.now()}
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
