@@ -1,7 +1,7 @@
 # discourse-cas-bridge
 small flask auth bridge - using discourse as an sso provider for rocket.chat
 
-__disclaimer:__ this is a hack i made for a small community space. i am not a sercuity expert - use at your own risk !
+__disclaimer:__ this is a hack i made for a small community space. i am not an expert - use at your own risk !
 
 more important details here ...
 
