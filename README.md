@@ -1,5 +1,6 @@
-# discourse-cas-bridge
-small flask auth bridge - using discourse as an sso provider for rocket.chat
+# auth-rocketchat-from-discourse
+
+small flask app that allows using discourse as an sso provider for rocket.chat
 
 __disclaimer:__ this is a hack i made for a small community space. i am not an expert - use at your own risk !
 
@@ -64,10 +65,10 @@ __rocket.chat__ <--- __bridge__
 ### some cas / related resources that helped:
 
 - https://github.com/RocketChat/Rocket.Chat
-- https://docs.traefik.io/routing/routers/
 - https://apereo.github.io/cas/6.0.x/protocol/CAS-Protocol-V2-Specification.html
 - https://kb.iu.edu/d/bfpq
-- https://kb.iu.edu/d/bfpq#validate
 - https://djangocas.dev/docs/latest/CAS-Protocol-Specification.html
 - https://codenoble.com/blog/cas-authentication-explained/
+- https://docs.traefik.io/routing/routers/
+- https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
 
