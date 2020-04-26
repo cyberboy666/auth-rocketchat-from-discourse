@@ -74,6 +74,22 @@ __rocket.chat__ <--- __bridge__
 
 # how i set this up
 
+## first configure in the apps
+
+in discourse admin panel go to settings -> login -> scroll to sso options
+
+![image](https://user-images.githubusercontent.com/12017938/80315780-16a97700-87fa-11ea-887f-52a194489e11.png)
+
+you need to check __enable sso provider__ and add your rocketchat url and a secret __sso provider secrets__ here. make sure you really do save this correctly
+
+next in rocketchat admin -> CAS
+
+![image](https://user-images.githubusercontent.com/12017938/80315843-81f34900-87fa-11ea-91b6-fec5f743ceb6.png)
+
+need to enable CAS and set the __SSO Base URL__ and __SSO Login URL__. these should be _<base-url>/auth_ and _<base-url>/auth/forward_
+
+## next the request routing
+
 we are running rocketchat on a digitalocean droplet with [1clickInstall](https://marketplace.digitalocean.com/apps/rocket-chat). this made it a bit difficult to get started because i didnt know how the requests were getting routed to the rocketchat appilication. it seemed neither nginx nor apache were installed on the machine.
 
 running this command was helpful `netstat -tulpn`
@@ -90,4 +106,23 @@ i configured the routing so any requests on the path `/auth` were routed to port
 
 next would be to install _flask_ with _gunicorn_. you need a WSGI application server like Gunicorn because the server that comes with flask is [not meant for production](https://vsupalov.com/flask-web-server-in-production/) (in this case its not really _production_, as only handling a few requests whenever someone logs on to our small forum, but better to be safe - with only a few extra lines)
 
+## finally the application
+
 from here i more or less followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04)but left our nginx since we using traefik. and just pointed directly to the port rather than with the sock - i dont actually know the difference tbh, its just how i had it set up while testing.
+
+cloned this repo into home/<user>/ `git clone https://github.com/langolierz/auth-rocketchat-from-discourse.git` and enter folder
+  
+ edit the _main.py_ file and add your _bridge_base_url_, _discourse_base_url_ and _sso_secret_ from discourse setup.
+ 
+ ![image](https://user-images.githubusercontent.com/12017938/80316066-e7940500-87fb-11ea-8879-8c2ff0aba980.png)
+  
+- from within the repo setup virtualenv `python3.6 -m venv auth-rocketchat-from-discourse` and `source auth-rocketchat-from-discourse/bin/activate`
+- install dependancies `pip install wheel` and `pip install gunicorn flask lxml`
+- leave virtualenv: `deactivate`
+- create _systemd_ service unit file: `sudo nano /etc/systemd/system/auth-rocketchat-from-discourse.service` and start it `sudo systemctl start auth-rocketchat-from-discourse` , sudo systemctl enable auth-rocketchat-from-discourse (check status `sudo systemctl status auth-rocketchat-from-discourse`)
+ 
+![image](https://user-images.githubusercontent.com/12017938/80316391-d1874400-87fd-11ea-941a-8742f70a5254.png)
+
+thats it ! if all went well you should be able to hit the CAS button from the rocketchat signin - which will either take you directly to chat or prompt you to sign in/up at discourse.
+
+one thing to consider is whether to enable the _Trust CAS username_ inside rocketchat setting. this is risky when left on as any rocketchat account with a username diffent to on discourse can be taken over. however it could be useful to enable just for a short window to allow existing users to pair their accounts. disabling username changing in rocketchat will also reduce this risk.
