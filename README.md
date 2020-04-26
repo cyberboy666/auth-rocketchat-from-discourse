@@ -108,9 +108,9 @@ next would be to install _flask_ with _gunicorn_. you need a WSGI application se
 
 ## finally the application
 
-from here i more or less followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04)but left our nginx since we using traefik. and just pointed directly to the port rather than with the sock - i dont actually know the difference tbh, its just how i had it set up while testing.
+from here i more or less followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04) but left our nginx since we are using traefik already. i just pointed it directly to the port rather than with the sock - i dont actually know the difference here, i just left it how i had it set up while testing because it worked.
 
-cloned this repo into home/<user>/ `git clone https://github.com/langolierz/auth-rocketchat-from-discourse.git` and enter folder
+next step is to clone this repo into home/username/ `git clone https://github.com/langolierz/auth-rocketchat-from-discourse.git` and `cd auth-rocketchat-from-discourse`
   
  edit the _main.py_ file and add your _bridge_base_url_, _discourse_base_url_ and _sso_secret_ from discourse setup.
  
@@ -124,5 +124,9 @@ cloned this repo into home/<user>/ `git clone https://github.com/langolierz/auth
 ![image](https://user-images.githubusercontent.com/12017938/80316391-d1874400-87fd-11ea-941a-8742f70a5254.png)
 
 thats it ! if all went well you should be able to hit the CAS button from the rocketchat signin - which will either take you directly to chat or prompt you to sign in/up at discourse.
+
+### afterthoughts
+
+think we will hide the email/password login with some css to encourage users to create discourse accounts and link them.
 
 one thing to consider is whether to enable the _Trust CAS username_ inside rocketchat setting. this is risky when left on as any rocketchat account with a username diffent to on discourse can be taken over. however it could be useful to enable just for a short window to allow existing users to pair their accounts. disabling username changing in rocketchat will also reduce this risk.
