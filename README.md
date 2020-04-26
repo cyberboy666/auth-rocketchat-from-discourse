@@ -72,3 +72,22 @@ __rocket.chat__ <--- __bridge__
 - https://docs.traefik.io/routing/routers/
 - https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
 
+# how i set this up
+
+we are running rocketchat on a digitalocean droplet with [1clickInstall](https://marketplace.digitalocean.com/apps/rocket-chat). this made it a bit difficult to get started because i didnt know how the requests were getting routed to the rocketchat appilication. it seemed neither nginx nor apache were installed on the machine.
+
+running this command was helpful `netstat -tulpn`
+
+![image](https://user-images.githubusercontent.com/12017938/80313835-d3490b80-87ed-11ea-848e-5226f639d156.png)
+
+from here i could see that `traefik` was routing to port 3000 (rocketchat).
+
+`sudo nano /etc//traefik/traefik.toml`
+
+i configured the routing so any requests on the path `/auth` were routed to port `5000` where my flask app would be running
+
+![image](https://user-images.githubusercontent.com/12017938/80314041-1788db80-87ef-11ea-9805-d84f7986dc00.png)
+
+next would be to install _flask_ with _gunicorn_. you need a WSGI application server like Gunicorn because the server that comes with flask is [not meant for production](https://vsupalov.com/flask-web-server-in-production/) (in this case its not really _production_, as only handling a few requests whenever someone logs on to our small forum, but better to be safe - with only a few extra lines)
+
+from here i more or less followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04)but left our nginx since we using traefik. and just pointed directly to the port rather than with the sock - i dont actually know the difference tbh, its just how i had it set up while testing.
