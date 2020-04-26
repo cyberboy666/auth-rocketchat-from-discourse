@@ -60,3 +60,14 @@ __rocket.chat__ <--- __bridge__
 5. _rocketchat_ sends (service-to-service) ticket back to _bridge_ for validation. if ticket matches then idenity information is returned to rocketchat and account is created/logged in:
 
 `GET <bridge>/auth/proxyValidate?ticket={ticket}`
+
+### some cas / related resources that helped:
+
+- https://github.com/RocketChat/Rocket.Chat
+- https://docs.traefik.io/routing/routers/
+- https://apereo.github.io/cas/6.0.x/protocol/CAS-Protocol-V2-Specification.html
+- https://kb.iu.edu/d/bfpq
+- https://kb.iu.edu/d/bfpq#validate
+- https://djangocas.dev/docs/latest/CAS-Protocol-Specification.html
+- https://codenoble.com/blog/cas-authentication-explained/
+
