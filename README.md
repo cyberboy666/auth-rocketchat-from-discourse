@@ -1,10 +1,8 @@
 # auth-rocketchat-from-discourse
 
-small flask app that allows using discourse as an sso provider for rocket.chat
+a small flask app that allows using __discourse__ as a _single-sign-on_ provider for __rocket.chat__
 
-__disclaimer:__ this is a hack i made for a small community space. i am not an expert - use at your own risk !
-
-more important details here ...
+__disclaimer:__ this is a hack i made for a small community space. it follows all the discourse-sso guidelines so should be safe but i am not a security expert - use at your own risk !
 
 ## background
 
