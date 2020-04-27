@@ -113,20 +113,20 @@ from here i more or less followed [this guide](https://www.digitalocean.com/comm
 next step is to clone this repo into home/username/ `git clone https://github.com/langolierz/auth-rocketchat-from-discourse.git` and `cd auth-rocketchat-from-discourse`
   
  edit the _main.py_ file and add your _bridge_base_url_, _discourse_base_url_ and _sso_secret_ from discourse setup.
- 
- ![image](https://user-images.githubusercontent.com/12017938/80316066-e7940500-87fb-11ea-8879-8c2ff0aba980.png)
+  
+  ![image](https://user-images.githubusercontent.com/12017938/80316391-d1874400-87fd-11ea-941a-8742f70a5254.png)
   
 - from within the repo setup virtualenv `python3.6 -m venv auth-rocketchat-from-discourse` and `source auth-rocketchat-from-discourse/bin/activate`
 - install dependancies `pip install wheel` and `pip install gunicorn flask lxml`
 - leave virtualenv: `deactivate`
 - create _systemd_ service unit file: `sudo nano /etc/systemd/system/auth-rocketchat-from-discourse.service` and start it `sudo systemctl start auth-rocketchat-from-discourse` , sudo systemctl enable auth-rocketchat-from-discourse (check status `sudo systemctl status auth-rocketchat-from-discourse`)
  
-![image](https://user-images.githubusercontent.com/12017938/80316391-d1874400-87fd-11ea-941a-8742f70a5254.png)
+ ![image](https://user-images.githubusercontent.com/12017938/80342745-f9f65900-8864-11ea-8ad3-d1865f94b684.png)
 
 thats it ! if all went well you should be able to hit the CAS button from the rocketchat signin - which will either take you directly to chat or prompt you to sign in/up at discourse.
 
 ### afterthoughts
 
-think we will hide the email/password login with some css to encourage users to create discourse accounts and link them.
+login/signup with email can be disabled in the rocketchat admin panel. we will force everyone to use a discourse account.
 
-one thing to consider is whether to enable the _Trust CAS username_ inside rocketchat setting. this is risky when left on as any rocketchat account with a username diffent to on discourse can be taken over. however it could be useful to enable just for a short window to allow existing users to pair their accounts. disabling username changing in rocketchat will also reduce this risk.
+one thing to consider is whether to enable the _Trust CAS username_ inside rocketchat setting. this is risky when left on as any rocketchat account with a username diffent to on discourse can be taken over. however it could be useful to enable just for a short window to allow existing users to pair their accounts. disabling username changing in rocketchat will also reduce this risk. tried to use this to merge existing accounts but it didnt work - i think maybe because we were set to owner of channels and this caused it to fail somehow
