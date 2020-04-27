@@ -26,7 +26,7 @@ for our use case it is unlikely we will need additional services. also it makes 
 
 i will run a small [flask](https://flask.palletsprojects.com/en/1.1.x/) service that acts as a bridge between rocket.chat and discourse auth. it performs all the nessicary encoding and hash checks required for discourses sso protocal, and relays this information back to rocket.chat in the cas format it expects.
 
-### request flow
+## request flow
 
 _user redirect and sign-in_
 
