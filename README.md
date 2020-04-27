@@ -102,9 +102,9 @@ i configured the routing so any requests on the path `/auth` were routed to port
 
 ![image](https://user-images.githubusercontent.com/12017938/80314041-1788db80-87ef-11ea-9805-d84f7986dc00.png)
 
-next would be to install _flask_ with _gunicorn_. you need a WSGI application server like Gunicorn because the server that comes with flask is [not meant for production](https://vsupalov.com/flask-web-server-in-production/) (in this case its not really _production_, as only handling a few requests whenever someone logs on to our small forum, but better to be safe - with only a few extra lines)
-
 ## finally the application
+
+next would be to install _flask_ with _gunicorn_. you need a WSGI application server like Gunicorn because the server that comes with flask is [not meant for production](https://vsupalov.com/flask-web-server-in-production/) (in this case its not really _production_, as only handling a few requests whenever someone logs on to our small forum, but better to be safe - with only a few extra lines)
 
 from here i more or less followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04) but left our nginx since we are using traefik already. i just pointed it directly to the port rather than with the sock - i dont actually know the difference here, i just left it how i had it set up while testing because it worked.
 
