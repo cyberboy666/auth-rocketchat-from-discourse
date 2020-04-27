@@ -130,3 +130,14 @@ thats it ! if all went well you should be able to hit the CAS button from the ro
 login/signup with email can be disabled in the rocketchat admin panel. we will force everyone to use a discourse account.
 
 one thing to consider is whether to enable the _Trust CAS username_ inside rocketchat setting. this is risky when left on as any rocketchat account with a username diffent to on discourse can be taken over. however it could be useful to enable just for a short window to allow existing users to pair their accounts. disabling username changing in rocketchat will also reduce this risk. tried to use this to merge existing accounts but it didnt work - i think maybe because we were set to owner of channels and this caused it to fail somehow
+
+# results
+
+just a few screenshots of the (near seamless) intergration and login flow between our discourse forum and rocketchat chatroom
+
+![image](https://user-images.githubusercontent.com/12017938/80374299-c0d6dc80-8896-11ea-81a3-8ce2454435de.png)
+
+![image](https://user-images.githubusercontent.com/12017938/80374489-02678780-8897-11ea-85cd-d533ef32c3ab.png)
+
+![image](https://user-images.githubusercontent.com/12017938/80374555-1b703880-8897-11ea-845b-c5eb3d55b3c6.png)
+
