@@ -85,6 +85,12 @@ next in rocketchat admin -> CAS
 ![image](https://user-images.githubusercontent.com/12017938/80315843-81f34900-87fa-11ea-91b6-fec5f743ceb6.png)
 
 need to enable CAS and set the __SSO Base URL__ and __SSO Login URL__. these should be _<base-url>/auth_ and _<base-url>/auth/forward_
+  
+you should also add `Always Sync User Data` and add in 
+
+```
+Attribute Map: {"email":"%email%", "name":"%username%"}
+```
 
 ## next the request routing
 
