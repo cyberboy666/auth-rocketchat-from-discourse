@@ -10,8 +10,8 @@ import hashlib
 app = Flask(__name__)
 
 sso_secret = '' ## this is set in the discourse login menu
-bridge_base_url = ''
-discourse_base_url = ''
+bridge_base_url = '' ## these must be https
+discourse_base_url = '' ## these must be https
 
 memory_store = {}
 
